@@ -2,15 +2,13 @@
   "name": "crud-tasks-rodriguez-gonzalo",
   "version": "1.0.0",
   "main": "app.js",
+  "type": "module",
   "scripts": {
-    "type": "module",
-    "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
@@ -19,5 +17,14 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gonzalolrodriguez/crud-tasks-rodriguez-gonzalo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gonzalolrodriguez/crud-tasks-rodriguez-gonzalo/issues"
+  },
+  "homepage": "https://github.com/gonzalolrodriguez/crud-tasks-rodriguez-gonzalo#readme",
+  "description": ""
 }

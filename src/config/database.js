@@ -14,9 +14,14 @@ export const sequelize = new Sequelize(
     }
 );
 
-try {
-    await sequelize.authenticate();
-    console.log("✅ Conexión exitosa a la base de datos");
-} catch (error) {
-    console.error("Error al conectar a la base de datos:", error);
+
+
+export const initDB = async () => {
+    try {
+        await sequelize.authenticate();
+        console.log("La conexión ha sido exitosa.");
+        await sequelize.sync();
+    } catch (error) {
+        console.error("No se puede conectar a la base de datos:", error);
+    }
 }

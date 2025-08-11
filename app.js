@@ -3,8 +3,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import { initDB } from "./src/config/database.js";
-import routerTask from "./src/routes/task.routes.js";
-import routerUser from "./src/routes/user.routes.js";
+import routerTask from "./src/routes/tasks.routes.js";
+import routerUser from "./src/routes/users.routes.js";
 
 dotenv.config();
 
@@ -16,10 +16,14 @@ app.use(express.json());
 app.use("/api", routerTask);
 app.use("/api", routerUser);
 
-initDB().then(() => {
-    app.listen(PORT, () => {
-        console.log(
-            `Conexión con la base de datos establecida \nhttp://localhost:${PORT}/api/task \nhttp://localhost:${PORT}/api/user`
-        );
-    });
-});
+initDB()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(
+                `Conexión con la base de datos establecida \nhttp://localhost:${PORT}/api/task \nhttp://localhost:${PORT}/api/user`
+            );
+        });
+    })
+        .catch((error) => {
+            console.error("No se pudo conectar a la base de datos. El servidor no se inició.");
+        });
