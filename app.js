@@ -1,3 +1,5 @@
+//Este archivo es el punto de entrada de la aplicación
+
 import express from "express";
 import dotenv from "dotenv";
 import { initDB } from "./src/config/database.js";
