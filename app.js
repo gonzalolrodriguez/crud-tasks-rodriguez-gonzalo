@@ -1,12 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
-import { initDB } from "./config/database.js";
+import { initDB } from "./src/config/database.js";
 
-// Importar rutas
-import userRoutes from "./routes/users.routes.js";
-import taskRoutes from "./routes/tasks.routes.js";
-import profileRoutes from "./routes/profiles.routes.js";
-import projectRoutes from "./routes/projects.routes.js";
+// Rutas
+import userRoutes from "./src/routes/users.routes.js";
+import taskRoutes from "./src/routes/tasks.routes.js";
+import profileRoutes from "./src/routes/profiles.routes.js";
+import projectRoutes from "./src/routes/projects.routes.js";
 
 dotenv.config();
 
@@ -21,15 +21,14 @@ app.use("/api", projectRoutes);
 
 // Inicializar DB y servidor
 const PORT = process.env.PORT || 3000;
-
 (async () => {
     try {
         await initDB();
         app.listen(PORT, () => {
-            console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+            console.log(`Servidor corriendo en http://localhost:${PORT}`);
         });
     } catch (error) {
-        console.error("❌ Error al iniciar la aplicación:", error.message);
+        console.error("Error al iniciar la aplicación:", error.message);
     }
 })();
 

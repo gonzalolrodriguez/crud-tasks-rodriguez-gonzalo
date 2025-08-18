@@ -3,23 +3,15 @@ import { sequelize } from "../config/database.js";
 import { User } from "./users.models.js";
 
 export const Project = sequelize.define("Project", {
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    name: {
-        type: DataTypes.STRING(100),
-        allowNull: false,
-        unique: true
-    },
-    description: {
-        type: DataTypes.STRING(200),
-        allowNull: true
-    }
+    id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
+    name: { type: DataTypes.STRING(100), allowNull: false, unique: true },
+    description: { type: DataTypes.STRING(200), allowNull: true }
+}, {
+    tableName: "Projects",
+    timestamps: true
 });
 
-// Relación N:M
+// Tabla intermedia para N:M
 export const UserProjects = sequelize.define("UserProjects", {}, { timestamps: false });
 
 User.belongsToMany(Project, { through: UserProjects, as: "projects", foreignKey: "user_id" });

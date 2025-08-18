@@ -14,14 +14,15 @@ export const sequelize = new Sequelize(
     }
 );
 
-
-
-export const initDB = async () => {
+export async function initDB() {
     try {
         await sequelize.authenticate();
-        console.log("La conexión ha sido exitosa.");
-        await sequelize.sync();
+        console.log("✅ Conexión a la base de datos exitosa.");
+        // Fuerza recrear tablas limpias para evitar errores de FK
+        await sequelize.sync({ force: true });
+        console.log("✅ Tablas sincronizadas correctamente");
     } catch (error) {
-        console.error("No se puede conectar a la base de datos:", error);
+        console.error("Error al conectar la base de datos:", error.message);
+        throw error;
     }
 }
