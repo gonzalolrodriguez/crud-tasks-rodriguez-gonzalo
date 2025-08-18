@@ -1,29 +1,36 @@
-//Este archivo es el punto de entrada de la aplicación
-
 import express from "express";
 import dotenv from "dotenv";
-import { initDB } from "./src/config/database.js";
-import routerTask from "./src/routes/tasks.routes.js";
-import routerUser from "./src/routes/users.routes.js";
+import { initDB } from "./config/database.js";
+
+// Importar rutas
+import userRoutes from "./routes/users.routes.js";
+import taskRoutes from "./routes/tasks.routes.js";
+import profileRoutes from "./routes/profiles.routes.js";
+import projectRoutes from "./routes/projects.routes.js";
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT;
-
 app.use(express.json());
 
-app.use("/api", routerTask);
-app.use("/api", routerUser);
+// Rutas
+app.use("/api", userRoutes);
+app.use("/api", taskRoutes);
+app.use("/api", profileRoutes);
+app.use("/api", projectRoutes);
 
-initDB()
-    .then(() => {
+// Inicializar DB y servidor
+const PORT = process.env.PORT || 3000;
+
+(async () => {
+    try {
+        await initDB();
         app.listen(PORT, () => {
-            console.log(
-                `Conexión con la base de datos establecida \nhttp://localhost:${PORT}/api/task \nhttp://localhost:${PORT}/api/user`
-            );
+            console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
         });
-    })
-        .catch((error) => {
-            console.error("No se pudo conectar a la base de datos. El servidor no se inició.");
-        });
+    } catch (error) {
+        console.error("❌ Error al iniciar la aplicación:", error.message);
+    }
+})();
+
+export default app;
