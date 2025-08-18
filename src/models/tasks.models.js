@@ -19,5 +19,9 @@ export const Task = sequelize.define("Task", {
     isComplete: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
+    },
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 });
