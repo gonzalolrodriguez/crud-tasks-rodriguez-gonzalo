@@ -4,9 +4,7 @@ import { User } from "../models/users.models.js";
 export const createProfile = async (req, res) => {
     try {
         const { address, phone, user_id } = req.body;
-        if (!address || !phone || !user_id) {
-            return res.status(400).json({ message: "Datos inválidos" });
-        }
+        if (!address || !phone || !user_id) return res.status(400).json({ message: "Datos inválidos" });
 
         const usuario = await User.findByPk(user_id);
         if (!usuario) return res.status(404).json({ message: "Usuario no encontrado" });
@@ -23,7 +21,7 @@ export const createProfile = async (req, res) => {
 
 export const getProfiles = async (req, res) => {
     try {
-        const perfiles = await Profile.findAll({ include: [{ model: User, as: "user", attributes: ["id", "name", "email"] }] });
+        const perfiles = await Profile.findAll({ include: [{ model: User, as: "user" }] });
         res.status(200).json(perfiles);
     } catch (error) {
         res.status(500).json({ message: "Error al obtener perfiles", error: error.message });

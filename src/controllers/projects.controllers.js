@@ -4,9 +4,7 @@ import { User } from "../models/users.models.js";
 export const createProject = async (req, res) => {
     try {
         const { name, description, user_ids } = req.body;
-        if (!name || name.length > 100) {
-            return res.status(400).json({ message: "Nombre inválido" });
-        }
+        if (!name) return res.status(400).json({ message: "Nombre inválido" });
 
         const existe = await Project.findOne({ where: { name } });
         if (existe) return res.status(400).json({ message: "El proyecto ya existe" });
