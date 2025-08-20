@@ -1,7 +1,7 @@
 import { User } from "../models/users.models.js";
 import { Task } from "../models/tasks.models.js";
 import { Profile } from "../models/profile.models.js";
-import { Project } from "../models/project.models.js";
+import { Project } from "../models/projects.models.js";
 
 export const createUser = async (req, res) => {
     try {

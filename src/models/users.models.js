@@ -6,4 +6,7 @@ export const User = sequelize.define("users", {
     name: { type: DataTypes.STRING(100), allowNull: false },
     email: { type: DataTypes.STRING(100), allowNull: false, unique: true },
     password: { type: DataTypes.STRING(100), allowNull: false }
-}, { tableName: "users" });
+}, {
+    tableName: "users",
+    timestamps: false
+});
