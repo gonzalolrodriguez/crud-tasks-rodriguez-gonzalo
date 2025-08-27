@@ -1,9 +1,7 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
-
 dotenv.config();
 
-// Conexión Sequelize
 export const sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
@@ -16,15 +14,15 @@ export const sequelize = new Sequelize(
     }
 );
 
-// Inicialización de la DB
 export const initDB = async () => {
     try {
         await sequelize.authenticate();
-        console.log("Conexión a la base de datos establecida correctamente.");
+        console.log("Conexión a la base de datos OK");
+        // sincroniza modelos y aplica alter cuando haya cambios
         await sequelize.sync({ alter: true });
-        console.log("Modelos sincronizados correctamente.");
+        console.log("Modelos sincronizados");
     } catch (error) {
-        console.error("Error al conectar con la base de datos:", error.message);
-        process.exit(1); // termina si hay error
+        console.error("Error DB:", error.message);
+        process.exit(1);
     }
 };

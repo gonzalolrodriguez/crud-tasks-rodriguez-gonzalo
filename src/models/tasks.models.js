@@ -7,9 +7,20 @@ export const Task = sequelize.define("tasks", {
     title: { type: DataTypes.STRING(100), allowNull: false },
     description: { type: DataTypes.STRING(255), allowNull: false },
     isComplete: { type: DataTypes.BOOLEAN, defaultValue: false },
-    user_id: { type: DataTypes.INTEGER, allowNull: false, references: { model: "users", key: "id" } }
-}, { tableName: "tasks", timestamps: false });
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: { model: "users", key: "id" }
+    }
+}, {
+    tableName: "tasks",
+    timestamps: true
+});
 
-// Relaciones
-User.hasMany(Task, { foreignKey: "user_id", as: "tasks" });
+User.hasMany(Task, {
+    foreignKey: "user_id",
+    as: "tasks",
+    onDelete: "CASCADE",   // 🔹 cascada: borrar user -> borra sus tasks
+    onUpdate: "CASCADE"
+});
 Task.belongsTo(User, { foreignKey: "user_id", as: "user" });
