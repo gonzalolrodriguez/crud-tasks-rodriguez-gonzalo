@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-// Endpoints
+// Prefijo común
 app.use("/api", userRoutes);
 app.use("/api", taskRoutes);
 app.use("/api", profileRoutes);
@@ -25,6 +25,6 @@ const PORT = process.env.PORT;
 
 initDB().then(() => {
     app.listen(PORT, () => {
-        console.log(`Servidor corriendo en http://localhost:${PORT}`);
+        console.log(` Servidor en http://localhost:${PORT}`);
     });
 });

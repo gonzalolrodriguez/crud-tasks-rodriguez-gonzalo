@@ -1,6 +1,6 @@
 import { User } from "../models/users.models.js";
 import { Task } from "../models/tasks.models.js";
-import { Profile } from "../models/profiles.models.js";
+import { Profile } from "../models/profile.models.js";
 import { Project } from "../models/projects.models.js";
 
 export const createUser = async (req, res) => {
@@ -70,7 +70,7 @@ export const deleteUser = async (req, res) => {
         const user = await User.findByPk(req.params.id);
         if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
 
-        await user.destroy(); // 🔹 cascada eliminará profile, tasks y relaciones N:M
+        await user.destroy();
         return res.status(200).json({ message: "Usuario eliminado" });
     } catch (error) {
         return res.status(500).json({ message: "Error al eliminar usuario", error: error.message });

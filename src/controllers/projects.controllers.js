@@ -9,7 +9,7 @@ export const createProject = async (req, res) => {
         if (exists && !exists.deleted_at)
             return res.status(400).json({ message: "El proyecto ya existe" });
 
-        // Si existe soft-deleted con mismo nombre, se podría restaurar en vez de crear
+
         const project = await Project.create({ name, description });
         return res.status(201).json({ message: "Proyecto creado", project });
     } catch (error) {

@@ -16,7 +16,7 @@ export const Profile = sequelize.define("profiles", {
     timestamps: true
 });
 
-// 1:1 con cascada
+// 1:1 cascade
 User.hasOne(Profile, {
     foreignKey: "user_id",
     as: "profile",

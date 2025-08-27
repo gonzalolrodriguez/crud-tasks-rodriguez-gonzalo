@@ -8,6 +8,6 @@ export const Project = sequelize.define("projects", {
 }, {
     tableName: "projects",
     timestamps: true,
-    paranoid: true,            // 🔹 eliminación lógica
+    paranoid: true,            // Eliminación lógica
     deletedAt: "deleted_at"
 });

@@ -30,7 +30,7 @@ export const getUserProjects = async (_req, res) => {
                 { model: Project, as: "projects", through: { attributes: [] } }
             ]
         });
-        // Nota: Para listado más útil, solemos devolver desde User o Project con include.
+
         return res.status(200).json(relations);
     } catch (error) {
         return res.status(500).json({ message: "Error al obtener relaciones", error: error.message });

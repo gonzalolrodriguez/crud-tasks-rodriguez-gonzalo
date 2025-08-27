@@ -19,7 +19,7 @@ export const UserProjects = sequelize.define("user_projects", {
     tableName: "user_projects",
     timestamps: true,
     indexes: [
-        { unique: true, fields: ["user_id", "project_id"] } // relación única
+        { unique: true, fields: ["user_id", "project_id"] }
     ]
 });
 
@@ -28,7 +28,7 @@ User.belongsToMany(Project, {
     as: "projects",
     foreignKey: "user_id",
     otherKey: "project_id",
-    onDelete: "CASCADE",   // 🔹 borrar user -> elimina filas en tabla intermedia
+    onDelete: "CASCADE",   //  Se borra user -> y se eliminan filas en tabla intermedia
     onUpdate: "CASCADE"
 });
 Project.belongsToMany(User, {
@@ -36,6 +36,6 @@ Project.belongsToMany(User, {
     as: "users",
     foreignKey: "project_id",
     otherKey: "user_id",
-    onDelete: "CASCADE",   // 🔹 borrar project (soft o hard) -> elimina filas intermedias
+    onDelete: "CASCADE",   // Al borrar project (cascade o lógico) -> elimina filas intermedias
     onUpdate: "CASCADE"
 });

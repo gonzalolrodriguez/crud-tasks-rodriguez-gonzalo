@@ -20,7 +20,7 @@ export const Task = sequelize.define("tasks", {
 User.hasMany(Task, {
     foreignKey: "user_id",
     as: "tasks",
-    onDelete: "CASCADE",   // 🔹 cascada: borrar user -> borra sus tasks
+    onDelete: "CASCADE",   // se borra user y se borra sus tasks
     onUpdate: "CASCADE"
 });
 Task.belongsTo(User, { foreignKey: "user_id", as: "user" });
